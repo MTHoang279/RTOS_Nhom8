@@ -1,12 +1,12 @@
-# 🌱 Smart Agriculture CAN Communication System
+#  MEASUREMENT AND CONTROL SYSTEM OF SOIL MOISTURE OF LARGE GREEN HOUSE GROUP BASED ON DOUBLE CAN BUS
 
-This project implements a **FreeRTOS-based system** for smart agriculture, where a **STM32 microcontroller** sends soil/environment sensor data over **CAN bus** to an **ESP32-C3**, which displays the data, controls actuators (pump and fan), and uploads everything to **Grafana Cloud** via **InfluxDB**.
+This project implements a **FreeRTOS-based system** for smart agriculture, where a **STM32 microcontroller** sends soil/environment sensor data over **CAN bus** to an **ESP32-C3**, which displays the data, controls actuators (pump and fan), and uploads everything to **Grafana Cloud** and **InfluxDB**.
 
 ---
 
-## 📤 Sender (STM32 with MCP2515)
+##  Sender (STM32 with MCP2515)
 
-### 🔧 Hardware
+###  Hardware
 
 * STM32F103C8T6 (Blue Pill)
 * MCP2515 CAN module (8MHz crystal)
@@ -14,14 +14,14 @@ This project implements a **FreeRTOS-based system** for smart agriculture, where
 * Soil moisture sensor (analog)
 * Power: 3.3V / 5V (logic-level compatible with MCP2515)
 
-### 📦 Dependencies
+###  Dependencies
 
 * `MapleFreeRTOS900`
 * `SPI`
 * `mcp2515` library
 * `DHT` library
 
-### 🚀 Features
+###  Features
 
 * Periodically reads:
 
@@ -35,16 +35,16 @@ This project implements a **FreeRTOS-based system** for smart agriculture, where
   ```
 * Sends the frame every 2 seconds using FreeRTOS task
 
-### 🧵 Tasks
+###  Tasks
 
 * `taskReadSensors`: Reads and stores data in a shared struct
 * `taskSendCAN`: Sends CAN messages based on latest sensor readings
 
 ---
 
-## 📥 Receiver (ESP32-C3 with MCP2515)
+##  Receiver (ESP32-C3 with MCP2515)
 
-### 🔧 Hardware
+###  Hardware
 
 * ESP32-C3 Dev Board
 * MCP2515 CAN module (8MHz)
@@ -55,14 +55,14 @@ This project implements a **FreeRTOS-based system** for smart agriculture, where
   * One output for **fan (reversible)**
 * WiFi for Grafana Cloud connection
 
-### 📦 Dependencies
+###  Dependencies
 
 * `Adafruit_SSD1306`, `Adafruit_GFX`
 * `WiFi.h`
 * `InfluxDbClient.h`
 * `freertos/FreeRTOS.h` and related headers
 
-### 🚀 Features
+###  Features
 
 * Receives and decodes CAN messages
 * Displays live data on OLED
@@ -81,7 +81,7 @@ This project implements a **FreeRTOS-based system** for smart agriculture, where
     * `Temp < 25°C & Hum < 50%`: off
 * Uploads sensor data + actuator states to **Grafana via InfluxDB Cloud**
 
-### 🧵 Tasks
+###  Tasks
 
 * `readCANTask`: Reads incoming CAN frames
 * `controlMotorTask`: Controls pump motor
@@ -105,7 +105,7 @@ This project implements a **FreeRTOS-based system** for smart agriculture, where
 
 ---
 
-## 🖼 System Architecture
+##  System Architecture
 
 ```
 [Sensors] ─> STM32 ──> CAN bus ──> ESP32-C3 ──> [Display + Actuators + WiFi → Grafana]
@@ -113,7 +113,7 @@ This project implements a **FreeRTOS-based system** for smart agriculture, where
 
 ---
 
-## ⚠️ Notes
+## ⚠ Notes
 
 * MCP2515 modules must be properly grounded and terminated (120Ω resistor)
 * Ensure voltage compatibility between STM32 (3.3V) and MCP2515 (typically 5V)
