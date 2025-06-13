@@ -113,7 +113,7 @@ This project implements a **FreeRTOS-based system** for smart agriculture, where
 
 ---
 
-## ⚠ Notes
+##  Notes
 
 * MCP2515 modules must be properly grounded and terminated (120Ω resistor)
 * Ensure voltage compatibility between STM32 (3.3V) and MCP2515 (typically 5V)
